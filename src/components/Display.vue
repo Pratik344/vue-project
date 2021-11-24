@@ -58,6 +58,7 @@ export default {
             currentSortDir: 'asc',
             filter: '',
             search: '',
+            uid:'',
 
         }
     },

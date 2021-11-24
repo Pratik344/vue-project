@@ -2,26 +2,38 @@
 <div class="field">
     <label class="label">Search</label>
     <div class="control">
-      <input class="input" type="Search" placeholder="Search" v-model="filter"/>
+        <input class="input" type="Search" placeholder="Search" v-model="filter" />
     </div>
-  </div>
+</div>
 <table class="table is-striped" id="example">
     <thead>
         <tr>
             <th>Id </th>
+            <th @click="sort('firstName')">First Name</th>
+            <th @click="sort('lastName')">Last Name</th>
             <th @click="sort('email')">Email</th>
-            <th @click="sort('first_name')">First Name</th>
-            <th @click="sort('last_name')">Last Name</th>
-            <th>Avatar</th>
+            <th>Phone Number</th>
+            <th>BirthDate</th>
+            <th>Skill</th>
+            <th>Gender</th>
+            <th>Action</th>
+
         </tr>
     </thead>
     <tbody>
-        <tr v-for="item in filteredRows" :key="item.id">
+        <tr v-for="item in sortedList" :key="item.id">
             <td>{{item.id}}</td>
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
             <td>{{item.email}}</td>
-            <td>{{item.first_name}}</td>
-            <td>{{item.last_name}}</td>
-            <td><img class="img" :src="item.avatar" /></td>
+            <td>{{item.phoneNumber}}</td>
+            <td>{{item.birthDate}}</td>
+            <td>{{item.skill}}</td>
+            <td>{{item.Gender}}</td>
+            <div class="buttons">
+                <button class="button is-danger" @click="deleteUser(item.id)">Delete</button>
+                <button class="button is-success" @click="updateUser(item.id)">Update</button>
+            </div>
         </tr>
     </tbody>
 
@@ -32,19 +44,16 @@
 
 <script>
 import axios from 'axios';
-// import Swal from 'sweetalert2';
 import "@ocrv/vue-tailwind-pagination/dist/style.css";
 import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
-// import Swal from 'sweetalert2';
-
 export default {
-    name: "Home",
+    name: "Display",
     data() {
         return {
             list: [],
             currentPage: 1,
-            perPage: 6,
-            total: 12,
+            perPage: 10,
+            total: 50,
             currentSort: 'id',
             currentSortDir: 'asc',
             filter: '',
@@ -54,12 +63,9 @@ export default {
     },
     components: {
         VueTailwindPagination,
+      
     },
-    mounted() {
-
-        this.fetchUserData();
-    },
-    updated() {
+    created: function () {
         this.fetchUserData();
     },
     methods: {
@@ -77,9 +83,9 @@ export default {
             } else {
                 // console.log(this.page);
                 // console.log('this.currentPage: ', this.currentPage);
-                var response = await axios.get(`https://reqres.in/api/users?page=${this.currentPage}`);
-                // console.warn(response.data.data);
-                this.list = response.data.data
+                var response = await axios.get("http://localhost:3001/posts");
+                // console.warn(response.data);
+                this.list = response.data
             }
 
         },
@@ -90,6 +96,15 @@ export default {
             }
             this.currentSort = s;
         },
+        async deleteUser(userId) {
+            await axios.delete(`http://localhost:3001/posts/${userId}`)
+                .then(response => {
+                    console.log('response: ', response);
+                    let i = this.list.map(data => data.id).indexOf(userId);
+                    this.list.splice(i, 1)
+                });
+        },
+        
 
     },
     computed: {
@@ -102,7 +117,7 @@ export default {
                 return 0;
             });
         },
-        filteredRows() {
+        filteredRows: function () {
             return this.sortedList.filter(row => {
                 const employees = row.email.toString().toLowerCase();
                 const department = row.first_name.toLowerCase();
@@ -116,20 +131,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-.img {
-
-    height: 48px;
-    width: 48px;
-    border: 2px solid;
-    border-radius: 50px;
-
-}
-
-body {
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-;
-</style>

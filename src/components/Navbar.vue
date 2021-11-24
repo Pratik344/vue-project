@@ -14,9 +14,9 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item">
+            <router-link to="/Display" class="navbar-item">
                 Home
-            </a>
+            </router-link>
 
             <a class="navbar-item">
                 Documentation
@@ -48,10 +48,10 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary">
+                    <router-link to="/Register" class="button is-primary">
                         <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light" v-on:click="logout()">
+                    </router-link>
+                    <a to="/Register" class="button is-light" v-on:click="logout()">
                         Log Out
                     </a>
                     <router-link to="/Login" class="button is-light">
@@ -65,12 +65,20 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     name: "Navbar",
     methods: {
         logout() {
             localStorage.clear();
             // console.log(localStorage);
+            Swal.fire(
+                    'Error!',
+                    'Please Login First',
+                ),
+                this.$router.push('/Login');
+
         }
     }
 };

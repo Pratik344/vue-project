@@ -52,6 +52,7 @@ export default {
                 email: "",
                 password: "",
                 checkBox: false,
+
             }
         }
     },
@@ -62,11 +63,13 @@ export default {
                 // console.log("Login Successfully")
                 localStorage.setItem("email", this.loginForm.email);
                 console.log('localStorage: ', localStorage);
+
                 Swal.fire(
                     'Good job!',
                     'Login Successfully',
-                    
+
                 )
+                this.$router.push('/');
 
             } else {
                 localStorage.removeItem("email");

@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "firstName": "Pratik",
+      "lastName": "Trivedi",
+      "email": "pratik@gmail.com",
+      "phoneNumber": "8849744926",
+      "birthDate": "2000-08-03",
+      "skill": "React",
+      "Gender": "Male",
+      "id": 1
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

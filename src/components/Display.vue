@@ -1,10 +1,13 @@
 <template>
+
 <div class="field">
     <label class="label">Search</label>
     <div class="control">
         <input class="input" type="Search" placeholder="Search" v-model="filter" />
     </div>
 </div>
+<button class="button is-success" @click="this.$router.push('/Register');">Add User</button>
+
 <table class="table is-striped" id="example">
     <thead>
         <tr>
@@ -21,7 +24,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="item in sortedList" :key="item.id">
+        <tr v-for="item in filteredRows" :key="item.id">
             <td>{{item.id}}</td>
             <td>{{item.firstName}}</td>
             <td>{{item.lastName}}</td>
@@ -46,6 +49,8 @@
 import axios from 'axios';
 import "@ocrv/vue-tailwind-pagination/dist/style.css";
 import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
+import Swal from 'sweetalert2'
+
 export default {
     name: "Display",
     data() {
@@ -63,7 +68,7 @@ export default {
     },
     components: {
         VueTailwindPagination,
-      
+
     },
     created: function () {
         this.fetchUserData();
@@ -103,8 +108,17 @@ export default {
                     let i = this.list.map(data => data.id).indexOf(userId);
                     this.list.splice(i, 1)
                 });
+                Swal.fire(
+                    'Good job!',
+                    'Delete Successfully',
+
+                )
         },
-        
+        updateUser(id) {
+            localStorage.setItem('id', id)
+            this.$router.push('/Update');
+
+        },
 
     },
     computed: {
@@ -120,7 +134,7 @@ export default {
         filteredRows: function () {
             return this.sortedList.filter(row => {
                 const employees = row.email.toString().toLowerCase();
-                const department = row.first_name.toLowerCase();
+                const department = row.firstName.toLowerCase();
                 const searchTerm = this.filter.toLowerCase();
 
                 return department.includes(searchTerm) ||

@@ -67,7 +67,7 @@
             <button class="button is-link" v-on:click="submitForm()">Submit</button>
         </div>
         <div class="control">
-            <button class="button is-link is-light">Cancel</button>
+            <button class="button is-link is-light" @click="this.$router.push('/Display')">Cancel</button>
         </div>
     </div>
 </div>
@@ -75,6 +75,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default {
     name: "Register",
@@ -98,6 +99,12 @@ export default {
             // POST request using axios with async/await
             const response = await axios.post("http://localhost:3001/posts",this.form);
             this.from.id = response.data.id;
+            this.$router.push('/Display');
+            Swal.fire(
+                    'Good job!',
+                    'Register Successfully',
+
+                )
         }
 
     }

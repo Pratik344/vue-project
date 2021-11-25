@@ -9,6 +9,16 @@
       "skill": "React",
       "Gender": "Male",
       "id": 1
+    },
+    {
+      "firstName": "karan",
+      "lastName": "raval",
+      "email": "karan@gmail.com",
+      "phoneNumber": "5588556633",
+      "birthDate": "2000-11-15",
+      "skill": "Vue",
+      "Gender": "Male",
+      "id": 2
     }
   ],
   "comments": [],

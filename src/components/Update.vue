@@ -67,13 +67,15 @@
             <button class="button is-link" v-on:click="updateForm()" >Submit</button>
         </div>
         <div class="control">
-            <button class="button is-link is-light">Cancel</button>
+            <button class="button is-link is-light" @click="this.$router.push('/Display');">Cancel</button>
         </div>
     </div>
 </div>
 </template>
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'
+
 export default {
     name:"Update",
     data() {
@@ -99,13 +101,19 @@ export default {
 
         async fetchUserData() {
             // POST request using axios with async/await
-            const response = await axios.get("http://localhost:3001/posts/1");
+            const response = await axios.get(`http://localhost:3001/posts/${localStorage.id}`);
             this.form = response.data
         },
         async updateForm() {
             // POST request using axios with async/await
-            const response = await axios.put("http://localhost:3001/posts/1",this.form);
-            this.from.id = response.data.id;
+            const response = await axios.put(`http://localhost:3001/posts/${localStorage.id}`,this.form);
+            this.from = response.data;
+            this.$router.push('/Display');
+            Swal.fire(
+                    'Good job!',
+                    'Update Successfully',
+
+                )
         }
 
     }

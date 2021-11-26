@@ -4,6 +4,7 @@ import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import Display from './components/Display.vue'
 import Update from './components/Update.vue'
+import itemList from './components/itemList.vue'
 const routes=[
     {
         name:'Home',
@@ -29,6 +30,11 @@ const routes=[
         name:'Update',
         path:'/Update',
         component:Update
+    },
+    {
+        name:'Update',
+        path:'/itemList',
+        component:itemList
     }
 ];
 

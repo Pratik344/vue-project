@@ -42,13 +42,13 @@
 
 </table>
 
-<VueTailwindPagination :current="currentPage" :total="total" :per-page="perPage" @page-changed="onPageClick($event)" />
+<!-- <VueTailwindPagination :current="currentPage" :total="total" :per-page="perPage" @page-changed="onPageClick($event)" /> -->
 </template>
 
 <script>
 import axios from 'axios';
 import "@ocrv/vue-tailwind-pagination/dist/style.css";
-import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
+// import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
 import Swal from 'sweetalert2'
 
 export default {
@@ -67,19 +67,19 @@ export default {
         }
     },
     components: {
-        VueTailwindPagination,
+        // VueTailwindPagination,
 
     },
     created: function () {
         this.fetchUserData();
     },
     methods: {
-        onPageClick(event) {
-            console.log('event: ', event);
+        // onPageClick(event) {
+        //     console.log('event: ', event);
 
-            this.currentPage = event;
-            // console.log('this.currentPage: ', this.currentPage);
-        },
+        //     this.currentPage = event;
+        //     // console.log('this.currentPage: ', this.currentPage);
+        // },
         async fetchUserData() {
             // console.log('localStorage.email: ', localStorage.email);
             if (localStorage.length === 0) {

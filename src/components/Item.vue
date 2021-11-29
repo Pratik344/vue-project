@@ -15,15 +15,26 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     name: "Item",
     props: ['id', 'title', 'author', 'img', 'price','quantity', 'itemList'],
   
     methods: {
     addToCart(itemList) {
+        if (localStorage.length === 0) {
+               Swal.fire(
+                    'Error!',
+                    'Please Login First',
+
+
+                )
+                this.$router.push('/Login');
+        }else{
         // console.log('itemList: ', itemList);
         // console.log('id: ', id);
       this.$store.dispatch('addToCart', itemList);
+        }
     },
   },
 }

@@ -13,7 +13,6 @@
         <Item v-for="item in productList" :key="item.id" :id="item.id" :title="item.title" :img="item.img" :price="item.price" :author="item.author" :quantity="item.quantity" :itemList="item" />
 
    </div>
-   {{ inCart }}
   </div>
 </template>
 

@@ -32,7 +32,7 @@ const routes=[
         component:Update
     },
     {
-        name:'Update',
+        name:'itemList',
         path:'/itemList',
         component:itemList
     }

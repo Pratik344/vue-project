@@ -116,7 +116,7 @@ export default {
         },
         updateUser(id) {
             localStorage.setItem('id', id)
-            this.$router.push('/Update');
+            this.$router.push('/Update')
 
         },
 

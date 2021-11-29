@@ -106,21 +106,43 @@ inCart:[],
     inCart: state => state.inCart,
   },
   mutations: {
-    ADD_TO_CART(state, id) { state.inCart.push(id); },
-    INCREMENT(id)
+    ADD_TO_CART(state,itemList) /* { state.inCart.push(id); } */
     {
-      const updateCart=this.state.inCart.map((curElem)=>{
-        if(curElem.id===id){
-          return{...curElem,quantity:curElem.quantity+1};
-        }
-        return curElem;
-      });
-      return{...this.state.inCart=updateCart};
-    }
+      let found = state.inCart.find(product => product.id == itemList.id);
+      console.log('found: ', found);
+      if( found ) {
+        found.quantity++
+        // state.inCart.quantity++;
+      }
+      else{
+        state.inCart.push(itemList)
+           }
     },
+    INCREMENT(state,item)
+    {
+      item.quantity++
+      state.item++
+
+    },
+    DECREMENT(state,item)
+    {
+      let itemIdx = state.inCart.indexOf(item);
+      if(item.quantity===1){
+        state.inCart.splice(itemIdx, 1);
+      }
+      else{
+        item.quantity--
+        state.item--
+      }
+    },
+    REMOVE_FROM_CART(state, index) { state.inCart.splice(index, 1); },
+    },
+    
   actions: {
-    addToCart(context, id) { context.commit('ADD_TO_CART', id); },
-    increment(context,id){context.commit('INCREMENT',id);},
+    addToCart(context, itemList) { context.commit('ADD_TO_CART',itemList); },
+    increment(context,item){context.commit('INCREMENT',item);},
+    decrement(context,item){context.commit('DECREMENT',item);},
+    removeFromCart(context, index) { context.commit('REMOVE_FROM_CART', index); },
   },
   modules: {
   }

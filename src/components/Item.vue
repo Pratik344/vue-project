@@ -7,7 +7,7 @@
             <h4 class="card-title">{{ author }}</h4>
             <div class="card-text">₹{{ price}}</div>
             <div class="row justify-content-end">
-                <button class="btn btn-primary" @click="addToCart(id)">Add to cart</button>
+                <button class="btn btn-primary" @click="addToCart(itemList)">Add to cart</button>
             </div>
         </div>
     </div>
@@ -17,12 +17,13 @@
 <script>
 export default {
     name: "Item",
-    props: ['id', 'title', 'author', 'img', 'price','quantity'],
+    props: ['id', 'title', 'author', 'img', 'price','quantity', 'itemList'],
   
     methods: {
-    addToCart(id) {
-        console.log('id: ', id);
-      this.$store.dispatch('addToCart', id);
+    addToCart(itemList) {
+        // console.log('itemList: ', itemList);
+        // console.log('id: ', id);
+      this.$store.dispatch('addToCart', itemList);
     },
   },
 }

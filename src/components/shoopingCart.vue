@@ -22,12 +22,15 @@
                     <td>{{ item.price}}</td>
                     <td>
                         <div class="myButton">
-                            <button>-</button>
+                            <button @click="decrement(item)">-</button>
 
                             <input type="TEXT" size="50px" NAME="email" :value="item.quantity" disabled />
-                            <button @click="increment(id)">+</button>
+                            <button @click="increment(item)">+</button>
                         </div>
 
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" @click="removeFromCart(index)"> &times;</button>
                     </td>
                 </tr>
                 <tr>
@@ -88,7 +91,7 @@ export default {
         cart() {
             return this.$store.getters.inCart.map((cartItem) => {
                 return this.$store.getters.productList.find((forSaleItem) => {
-                    return cartItem === forSaleItem.id;
+                    return cartItem === forSaleItem;
                 });
             });
         },
@@ -97,10 +100,18 @@ export default {
         },
 
     },
-    methods:{
-        increment(id){
-            this.$store.dispatch('increment',id)
-        }
+    methods: {
+        increment(item) {
+            console.log('item: ', item);
+            this.$store.dispatch('increment', item)
+        },
+        removeFromCart(index) {
+            // console.log('index: ', index);
+            this.$store.dispatch('removeFromCart', index);
+        },
+        decrement(item){
+            this.$store.dispatch('decrement',item);
+        },
     }
 }
 </script>

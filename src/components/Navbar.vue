@@ -22,6 +22,10 @@
                 Shopping Cart
             </router-link>
 
+            <router-link to="/appointment" class="navbar-item">
+                Appointment
+            </router-link>
+
             <!-- <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     More

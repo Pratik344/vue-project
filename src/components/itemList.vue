@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="row">
-   
-        <Item v-for="item in productList" :key="item.id" :id="item.id" :title="item.title" :img="item.img" :price="item.price" :author="item.author" :quantity="item.quantity" :itemList="item" />
+        
+        <Item v-for="item in productList.slice(0,cPage)" :key="item.id" :id="item.id" :title="item.title" :img="item.img" :price="item.price" :author="item.author" :quantity="item.quantity" :itemList="item" @changePage="changePage($event)"/>
 
    </div>
   </div>
@@ -21,6 +21,11 @@ import Item from './Item.vue';
 import shoppingCart from './shoopingCart.vue';
 export default {
     name: "itemList",
+    data() {
+      return {
+        cPage:8
+      }
+    },
    computed: {
     productList() { return this.$store.getters.productList; },
     inCart() { return this.$store.getters.inCart; },
@@ -28,6 +33,18 @@ export default {
     components: {
         Item,
         shoppingCart,
-    }
+    },
+    methods:{
+    changePage:function(page)
+    {
+      console.log(this.page)
+      this.page=page;
+      this.cPage=page
+      if(this.cPage===500)
+      {
+        this.cPage=8
+      }
+    },
+}
 }
 </script>

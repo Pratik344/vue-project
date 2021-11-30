@@ -5,6 +5,7 @@ import Register from './components/Register.vue'
 import Display from './components/Display.vue'
 import Update from './components/Update.vue'
 import itemList from './components/itemList.vue'
+import Appointment from './components/Appointment.vue'
 const routes=[
     {
         name:'Home',
@@ -35,6 +36,11 @@ const routes=[
         name:'itemList',
         path:'/itemList',
         component:itemList
+    },
+    {
+        name:'appointment',
+        path:'/appointment',
+        component:Appointment
     }
 ];
 

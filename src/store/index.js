@@ -2,6 +2,25 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    dList:[],
+    doctorList:[
+      {
+        id:1,
+        img:"https://reqres.in/img/faces/4-image.jpg",
+        name:"Suresh Dasari",
+        designation:"Dentist",
+        rating:"4",
+        charge:100,
+      },
+      {
+        id:2,
+        img:"https://reqres.in/img/faces/5-image.jpg",
+        name:"Rajesh Patel",
+        designation:"ENT",
+        rating:"3",
+        charge:200,
+      },
+    ],
     productList: [{
       id: 1,
       img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
@@ -583,6 +602,8 @@ inCart:[],
   getters: {
     productList: state => state.productList,
     inCart: state => state.inCart,
+    doctorList:state => state.doctorList,
+    dList:state=>state.dList,
   },
   mutations: {
     ADD_TO_CART(state,itemList) /* { state.inCart.push(id); } */
@@ -596,6 +617,15 @@ inCart:[],
       else{
         state.inCart.push(itemList)
            }
+    },
+    ADD_TO_DOCTOR_LIST(state,doctor){
+      let doctorFound=state.dList.find(doctorFind=>doctorFind.id==doctor.id);
+      if(doctorFound){
+        alert("Doctor is already Exist")
+      }
+      else{
+        state.dList.push(doctor)
+      }
     },
     INCREMENT(state,item)
     {
@@ -622,6 +652,7 @@ inCart:[],
     increment(context,item){context.commit('INCREMENT',item);},
     decrement(context,item){context.commit('DECREMENT',item);},
     removeFromCart(context, index) { context.commit('REMOVE_FROM_CART', index); },
+    addToDoctorList(context,doctor) {context.commit("ADD_TO_DOCTOR_LIST",doctor)}
   },
   modules: {
   }

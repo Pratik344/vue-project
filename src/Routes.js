@@ -6,6 +6,7 @@ import Display from './components/Display.vue'
 import Update from './components/Update.vue'
 import itemList from './components/itemList.vue'
 import Appointment from './components/Appointment.vue'
+import appointmentDetail from './components/appointmentDetail.vue'
 const routes=[
     {
         name:'Home',
@@ -41,6 +42,11 @@ const routes=[
         name:'appointment',
         path:'/appointment',
         component:Appointment
+    },
+    {
+        name:'appointmentDetail',
+        path:'/appointmentDetail',
+        component:appointmentDetail
     }
 ];
 

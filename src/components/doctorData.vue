@@ -55,6 +55,7 @@ export default {
                 // console.log('itemList: ', itemList);
                 // console.log('id: ', id);
                 this.$store.dispatch('addToDoctorList', doctor);
+                this.$router.push('/appointmentDetail');
             }
         },
     },

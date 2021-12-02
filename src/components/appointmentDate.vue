@@ -1,5 +1,6 @@
 <template>
 <h2>{{currentDate}}</h2>
+<h2>{{currentTime}}</h2>
 <div class="scrollmenu">
     <a v-for="date in date" :key="date" @click="getData(date)">{{date}}</a>
 </div>
@@ -12,7 +13,7 @@
     <div class="chip-group" tabindex="-1" role="radiogroup">
         <div class="chip chip-checkbox" aria-labelledby="radioOneLabel" tabindex="0" role="radio" aria-checked="false" v-for="time in time" :key="time">
             <input type="radio" name="radioEx"  />
-            <span id="radioOneLabel">{{time}}</span>
+            <span id="radioOneLabel" @click="handleTime(time)">{{time}}</span>
         </div>
     </div>
 </div>
@@ -27,6 +28,7 @@ export default {
             date: [],
             currentDate: '',
             time:[],
+            currentTime:'',
         }
     },
     mounted() {
@@ -49,7 +51,7 @@ export default {
         },
         getTime() {
             const items = [];
-            new Array(12).fill().forEach((acc, index) => {
+            new Array(18).fill(8,8).forEach((acc, index) => {
                 items.push(moment({
                     hour: index
                 }).format('h:mm A'));
@@ -59,6 +61,9 @@ export default {
                 }).format('h:mm A'));
             })
            this.time=items
+        },
+        handleTime(time){
+            this.currentTime=time;
         }
     }
 

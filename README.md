@@ -1,5 +1,5 @@
 # my-project
-
+json-server --watch db.json --port 3001
 ## Project setup
 ```
 npm install
